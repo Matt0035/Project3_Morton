@@ -9,7 +9,14 @@ namespace Project3_Morton.Controllers
 {
     public class InvoiceLineItemController : Controller
     {
-        // GET: InvoiceLineItem
+        // GET: InvoiceLineItem'
+        /// <summary>
+        /// get all invoice line items and sort
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="sortBy"></param>
+        /// <param name="isDesc"></param>
+        /// <returns></returns>
         public ActionResult All(string id, int sortBy = 0, bool isDesc = false)
         {
             BooksEntities context = new BooksEntities();
@@ -68,6 +75,11 @@ namespace Project3_Morton.Controllers
             return View(invoiceLineItems);
         }
 
+        /// <summary>
+        /// add or delete lineitem get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Upsert(int id)
         {
@@ -84,7 +96,12 @@ namespace Project3_Morton.Controllers
             return View(viewModel);
         }
 
-
+        /// <summary>
+        /// add or delete line items post
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="productcode"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Upsert(UpsertItemsModel model, string productcode)
         {

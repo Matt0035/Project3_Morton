@@ -10,6 +10,13 @@ namespace Project3_Morton.Controllers
     public class OrderOptionController : Controller
     {
         // GET: OrderOption
+        /// <summary>
+        /// get list of all orderoptions that are not deleted and sort
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="sortBy"></param>
+        /// <param name="isDesc"></param>
+        /// <returns></returns>
         public ActionResult All(string id, int sortBy = 0, bool isDesc = false)
         {
             BooksEntities context = new BooksEntities();
@@ -50,8 +57,9 @@ namespace Project3_Morton.Controllers
             }
             return View(orders);
         }
+
         /// <summary>
-        /// hello
+        /// add or update orderoption get
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -68,7 +76,11 @@ namespace Project3_Morton.Controllers
             return View(orderOption);
         }
 
-
+        /// <summary>
+        /// add or delete orderoption post
+        /// </summary>
+        /// <param name="neworderOption"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Upsert(OrderOption neworderOption)
         {
@@ -91,6 +103,11 @@ namespace Project3_Morton.Controllers
             context.SaveChanges();
             return RedirectToAction("All");
         }
+        /// <summary>
+        /// delete orderoptions post
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -100,7 +117,11 @@ namespace Project3_Morton.Controllers
         }
 
 
-        
+        /// <summary>
+        /// delete orderoptions get
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Delete(OrderOption order)
         {

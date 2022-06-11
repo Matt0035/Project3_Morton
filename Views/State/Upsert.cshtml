@@ -9,6 +9,7 @@
 {
     @Html.TextBoxFor(c => c.StateCode, new { @class = "form-control", placeholder = "State Code" })
     @Html.TextBoxFor(c => c.StateName, new { @class = "form-control", placeholder = "State Name" })
- 
+
     <input type="submit" value="submit" class="btn btn-info" />
+    <input type="button" value="Delete" class="btn btn-danger" onclick="window.location.href = ('/State/Delete/@Model.StateCode')" />
 }

@@ -1,0 +1,18 @@
+﻿@model Project3_Morton.Models.Product
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+@using (Html.BeginForm("Delete", "Product", FormMethod.Post))
+{
+    <h3>Are you sure you want to delete this product?</h3>
+    @Html.HiddenFor(c => c.ProductCode, new { @class = "form-control", placeholder = "ProductCode" })
+    @Html.HiddenFor(c => c.Description, new { @class = "form-control", placeholder = "Description" })
+    @Html.HiddenFor(c => c.OnHandQuantity, new { @class = "form-control", placeholder = "OnHandQuantity" })
+    @Html.HiddenFor(c => c.UnitPrice, new { @class = "form-control", placeholder = "UnitPrice" })
+
+    <input type="submit" value="Submit" class="btn btn-info" />
+    <input type="button" value="Cancel" class="btn btn-danger" onclick="window.location.href = '/Product/All'" />
+}

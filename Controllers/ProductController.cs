@@ -10,42 +10,49 @@ namespace Project3_Morton.Controllers
     public class ProductController : Controller
     {
         // GET: Product
+        /// <summary>
+        /// make list of all products that are not deleted and sort
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="sortBy"></param>
+        /// <param name="isDesc"></param>
+        /// <returns></returns>
         public ActionResult All(string id, int sortBy = 0, bool isDesc = false)
         {
             BooksEntities context = new BooksEntities();
-            List<Product> products;
+            List<Product> products = context.Products.Where(c => c.IsDeleted == false).ToList();
             switch (sortBy)
             {
                 case 1:
                     {
                         if (isDesc)
-                            products = context.Products.OrderByDescending(c => c.UnitPrice).ToList();
+                            products = products.OrderByDescending(c => c.UnitPrice).ToList();
                         else
-                            products = context.Products.OrderBy(c => c.UnitPrice).ToList();
+                            products = products.OrderBy(c => c.UnitPrice).ToList();
                         break;
                     }
                 case 2:
                     {
                         if (isDesc)
-                            products = context.Products.OrderByDescending(c => c.OnHandQuantity).ToList();
+                            products = products.OrderByDescending(c => c.OnHandQuantity).ToList();
                         else
-                            products = context.Products.OrderBy(c => c.OnHandQuantity).ToList();
+                            products = products.OrderBy(c => c.OnHandQuantity).ToList();
                         break;
                     }
                 case 3:
                     {
                         if (isDesc)
-                            products = context.Products.OrderByDescending(c => c.Description).ToList();
+                            products = products.OrderByDescending(c => c.Description).ToList();
                         else
-                            products = context.Products.OrderBy(c => c.Description).ToList();
+                            products = products.OrderBy(c => c.Description).ToList();
                         break;
                     }
                 case 0:
                 default:
                     if (isDesc)
-                        products = context.Products.OrderByDescending(c => c.ProductCode).ToList();
+                        products = products.OrderByDescending(c => c.ProductCode).ToList();
                     else
-                        products = context.Products.OrderBy(c => c.ProductCode).ToList();
+                        products = products.OrderBy(c => c.ProductCode).ToList();
                     break;
             }
             if (!string.IsNullOrWhiteSpace(id))
@@ -60,7 +67,11 @@ namespace Project3_Morton.Controllers
             return View(products);
         }
 
-
+        /// <summary>
+        /// add or update product get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Upsert(string id)
         {
@@ -74,7 +85,11 @@ namespace Project3_Morton.Controllers
             return View(product);
         }
 
-
+        /// <summary>
+        /// add or update product post
+        /// </summary>
+        /// <param name="newProduct"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Upsert(Product newProduct)
         {
@@ -98,6 +113,43 @@ namespace Project3_Morton.Controllers
             return RedirectToAction("All");
         }
 
+        /// <summary>
+        /// delete product get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            BooksEntities context = new BooksEntities();
+            Product product = context.Products.Where(c => c.ProductCode == id).FirstOrDefault();
+            return View(product);
+        }
 
+
+        /// <summary>
+        /// delete product post
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Delete(Product product)
+        {
+            BooksEntities context = new BooksEntities();
+            try
+            {
+                if (context.Products.Where(c => c.ProductCode == product.ProductCode).Count() > 0)
+                {
+                    Product productDelete = context.Products.Where(c => c.ProductCode == product.ProductCode).FirstOrDefault();
+                    productDelete.IsDeleted = true;
+                }
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return RedirectToAction("All");
+        }
     }
 }

@@ -1,0 +1,16 @@
+﻿@model Project3_Morton.Models.State
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+@using (Html.BeginForm("Delete", "State", FormMethod.Post))
+{
+    <h3>Are you sure you want to delete this state?</h3>
+    @Html.HiddenFor(c => c.StateCode, new { @class = "form-control", placeholder = "State Code" })
+    @Html.HiddenFor(c => c.StateName, new { @class = "form-control", placeholder = "State Name" })
+
+    <input type="submit" value="Submit" class="btn btn-info" />
+    <input type="button" value="Cancel" class="btn btn-danger" onclick="window.location.href = '/State/All'" />
+}

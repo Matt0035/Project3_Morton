@@ -13,4 +13,5 @@
     @Html.TextBoxFor(c => c.UnitPrice, new { @class = "form-control", placeholder = "UnitPrice" })
 
     <input type="submit" value="submit" class="btn btn-info" />
+    <input type="button" value="Delete" class="btn btn-danger" onclick="window.location.href = ('/Product/Delete/@Model.ProductCode')" />
 }

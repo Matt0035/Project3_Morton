@@ -10,6 +10,13 @@ namespace Project3_Morton.Controllers
     public class InvoiceController : Controller
     {
         // GET: Invoice
+        /// <summary>
+        /// get list of all invoices that are not deleted and sort
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="sortBy"></param>
+        /// <param name="isDesc"></param>
+        /// <returns></returns>
         public ActionResult All(string id, int sortBy = 0, bool isDesc = false)
         {
             BooksEntities context = new BooksEntities();
@@ -84,6 +91,11 @@ namespace Project3_Morton.Controllers
             return View(invoice);
         }
 
+        /// <summary>
+        /// add or update invoice get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Upsert(int id)
         {
@@ -100,7 +112,12 @@ namespace Project3_Morton.Controllers
             return View(viewModel);
         }
 
-
+        /// <summary>
+        /// add or update invoice post
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="customerID"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Upsert(UpsertInvoiceModel model, string customerID)
         {
@@ -130,6 +147,11 @@ namespace Project3_Morton.Controllers
             return RedirectToAction("All");
         }
 
+        /// <summary>
+        /// delete invoice get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -139,7 +161,11 @@ namespace Project3_Morton.Controllers
         }
 
 
-        
+        /// <summary>
+        /// delete invoice post
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Delete(Invoice invoice)
         {
