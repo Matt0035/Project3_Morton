@@ -1,0 +1,14 @@
+﻿@model Project3_Morton.Models.State
+@{
+    ViewBag.Title = "Upsert";
+}
+
+<h2>Upsert a State</h2>
+
+@using (Html.BeginForm("Upsert", "State", FormMethod.Post))
+{
+    @Html.TextBoxFor(c => c.StateCode, new { @class = "form-control", placeholder = "State Code" })
+    @Html.TextBoxFor(c => c.StateName, new { @class = "form-control", placeholder = "State Name" })
+ 
+    <input type="submit" value="submit" class="btn btn-info" />
+}

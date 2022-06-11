@@ -1,0 +1,16 @@
+﻿@model Project3_Morton.Models.Product
+@{
+    ViewBag.Title = "Upsert";
+}
+
+<h2>Upsert a Product</h2>
+
+@using (Html.BeginForm("Upsert", "Product", FormMethod.Post))
+{
+    @Html.TextBoxFor(c => c.ProductCode, new { @class = "form-control", placeholder = "ProductCode" })
+    @Html.TextBoxFor(c => c.Description, new { @class = "form-control", placeholder = "Description" })
+    @Html.TextBoxFor(c => c.OnHandQuantity, new { @class = "form-control", placeholder = "OnHandQuantity" })
+    @Html.TextBoxFor(c => c.UnitPrice, new { @class = "form-control", placeholder = "UnitPrice" })
+
+    <input type="submit" value="submit" class="btn btn-info" />
+}

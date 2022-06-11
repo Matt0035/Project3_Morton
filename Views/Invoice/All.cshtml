@@ -1,0 +1,52 @@
+﻿@model List<Project3_Morton.Models.Invoice>
+@{
+    ViewBag.Title = "All";
+}
+
+<h2>All Invoices</h2>
+
+<a href="/Invoice/Upsert/0">Add New</a>
+
+<div class="row">
+    <div class="col-md-6">
+        <input id="txtSearch" type="text" class="form-control" placeholder="Search..." />
+    </div>
+    <div class="col-md-6">
+        <input type="button" class="btn btn-info" value="Search" onclick="Sortable.Search()" />
+
+    </div>
+</div>
+
+<table class="sortable table table-hover">
+    <thead>
+        <tr>
+            <th onclick="Sortable.Sort(0)">Invoice ID</th>
+            <th onclick="Sortable.Sort(1)">Invoice Date</th>
+            <th onclick="Sortable.Sort(2)">Invoice Total</th>
+            <th onclick="Sortable.Sort(3)">Product Total</th>
+            <th onclick="Sortable.Sort(4)">Sales Tax</th>
+            <th onclick="Sortable.Sort(5)">Shipping</th>
+            <th onclick="Sortable.Sort(6)">Customer ID</th>
+            <th>Actions</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var invoice in Model)
+        {
+            <tr>
+                <td>@invoice.InvoiceID</td>
+                <td>@invoice.InvoiceDate</td>
+                <td>@invoice.InvoiceTotal</td>
+                <td>@invoice.ProductTotal</td>
+                <td>@invoice.SalesTax</td>
+                <td>@invoice.Shipping</td>
+                <td>@invoice.CustomerID</td>
+                <td>
+                    <a href="/Invoice/Upsert/@invoice.InvoiceID">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

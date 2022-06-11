@@ -1,0 +1,28 @@
+﻿@model Project3_Morton.Models.UpsertInvoiceModel
+@{
+    ViewBag.Title = "Upsert";
+}
+
+<h2>Add a Invoice</h2>
+
+@using (Html.BeginForm("Upsert", "Invoice", FormMethod.Post))
+{
+    @Html.HiddenFor(gm => gm.Invoice.InvoiceID)
+    @Html.TextBoxFor(gm => gm.Invoice.InvoiceDate, new { @class = "form-control", placeholder = "Invoice Date" })
+    @Html.TextBoxFor(gm => gm.Invoice.InvoiceTotal, new { @class = "form-control", placeholder = "Invoice Total" })
+    @Html.TextBoxFor(gm => gm.Invoice.ProductTotal, new { @class = "form-control", placeholder = "Product Total" })
+    @Html.TextBoxFor(gm => gm.Invoice.SalesTax, new { @class = "form-control", placeholder = "SalesTax" })
+    @Html.TextBoxFor(gm => gm.Invoice.Shipping, new { @class = "form-control", placeholder = "Shipping" })
+
+    <input list="ID" name="customerID">
+
+    <datalist id="ID">
+        @foreach (var id in Model.Customers)
+        {
+            <option value="@id.CustomerID, @id.Name"></option>
+        }
+    </datalist>
+
+    <input type="button" value="Delete" class="btn btn-danger" onclick="window.location.href = ('/Invoice/Delete/@Model.Invoice.InvoiceID')" />
+    <input type="submit" value="submit" class="btn btn-info" />
+}

@@ -1,0 +1,20 @@
+﻿@model Project3_Morton.Models.Customer
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+@using (Html.BeginForm("Delete", "Customer", FormMethod.Post))
+{
+    <h3>Are you sure you want to delete this customer?</h3>
+    @Html.HiddenFor(c => c.CustomerID)
+    @Html.HiddenFor(c => c.Name, new { @class = "form-control", placeholder = "Name" })
+    @Html.HiddenFor(c => c.Address, new { @class = "form-control", id = "custAddress", placeholder = "Address" })
+    @Html.HiddenFor(c => c.City, new { @class = "form-control", id = "custCity", placeholder = "City" })
+    @Html.HiddenFor(c => c.ZipCode, new { @class = "form-control", id = "custZipCode", placeholder = "ZipCode" })
+    @Html.HiddenFor(c => c.State, new { @class = "form-control", id = "custState", placeholder = "State" })
+
+    <input type="submit" value="Submit" class="btn btn-info" />
+    <input type="button" value="Cancel" class="btn btn-danger" onclick="window.location.href = '/Customers/All'" />
+}

@@ -1,0 +1,17 @@
+﻿@model Project3_Morton.Models.OrderOption
+@{
+    ViewBag.Title = "Upsert";
+}
+
+<h2>Upsert a Order Option</h2>
+
+@using (Html.BeginForm("Upsert", "OrderOption", FormMethod.Post))
+{
+    @Html.HiddenFor(c => c.Id)
+    @Html.TextBoxFor(c => c.AdditionalBookShipCharge, new { @class = "form-control", placeholder = "AdditionalBook ShipCharge" })
+    @Html.TextBoxFor(c => c.FirstBookShipCharge, new { @class = "form-control", placeholder = "FirstBookShipCharge" })
+    @Html.TextBoxFor(c => c.SalesTaxRate, new { @class = "form-control", placeholder = "SalesTaxRate" })
+
+    <input type="submit" value="submit" class="btn btn-info" />
+    <input type="button" value="Delete" class="btn btn-danger" onclick="window.location.href = ('/OrderOption/Delete/@Model.Id')" />
+}

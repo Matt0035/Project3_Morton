@@ -1,0 +1,47 @@
+﻿@model List<Project3_Morton.Models.OrderOption>
+@{
+    ViewBag.Title = "All";
+}
+
+<h2>All Orders</h2>
+
+<a href="/OrderOption/Upsert/0">Add New</a>
+
+<div class="row">
+    <div class="col-md-6">
+        <input id="txtSearch" type="text" class="form-control" placeholder="Search..." />
+    </div>
+    <div class="col-md-6">
+        <input type="button" class="btn btn-info" value="Search" onclick="Sortable.Search()" />
+
+    </div>
+</div>
+
+<table class="sortable table table-hover">
+    <thead>
+        <tr>
+            <th onclick="Sortable.Sort(0)">ID</th>
+            <th onclick="Sortable.Sort(1)">AdditionalBookShipCharge</th>
+            <th onclick="Sortable.Sort(2)">SalesTax Rate</th>
+            <th onclick="Sortable.Sort(3)">First Book Ship Charge</th>
+            <th>Actions</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var orderOption in Model)
+        {
+            <tr>
+                <td>@orderOption.Id</td>
+                <td>@orderOption.AdditionalBookShipCharge</td>
+                <td>@orderOption.SalesTaxRate</td>
+                <td>@orderOption.FirstBookShipCharge</td>
+             
+                <td>
+                    <a href="/OrderOption/Upsert/@orderOption.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

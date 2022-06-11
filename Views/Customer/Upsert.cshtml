@@ -1,0 +1,33 @@
+﻿@model Project3_Morton.Models.Customer
+@{
+    ViewBag.Title = "Upsert";
+}
+
+<h2>Add a Customer</h2>
+
+@using (Html.BeginForm("Upsert", "Customer", FormMethod.Post))
+{
+    @Html.HiddenFor(c => c.CustomerID)
+    @Html.TextBoxFor(c => c.Name, new { @class = "form-control", placeholder = "Name" })
+    <div class="autocomplete-container" id="autocomplete-container"></div>
+    @Html.HiddenFor(c => c.Address, new { @class = "form-control", id = "custAddress", placeholder = "Address" })
+    @Html.HiddenFor(c => c.City, new { @class = "form-control", id = "custCity", placeholder = "City" })
+    @Html.HiddenFor(c => c.ZipCode, new { @class = "form-control", id = "custZipCode", placeholder = "ZipCode" })
+    @Html.HiddenFor(c => c.State, new { @class = "form-control", id = "custState", placeholder = "State" })
+
+    <input type="submit" value="submit" class="btn btn-info" />
+    <input type="button" value="Delete" class="btn btn-danger" onclick="window.location.href=('/Customer/Delete/@Model.CustomerID')" />
+}
+
+
+
+<script src="~/Scripts/GeoAPI.js"></script>
+
+
+
+<script>
+    if ("@Model.Address") {
+        let customerAddress = "@Model.Address, @Model.City, @Model.State, @Model.ZipCode";
+        $("#autocomplete-container input").val(customerAddress);
+    }
+</script>
